@@ -12,22 +12,20 @@ const userIDAuthedContext = "userID"
 func (api *API) AuthorizeUserMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Get the header
-		// Get header
-		const headerName = "Authorization"
 		const prefix = "Bearer "
-		header := c.Request.Header.Get(headerName)
+		header := c.Request.Header.Get("Authorization")
 		if !strings.HasPrefix(header, prefix) {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, ErrorResponse{"empty auth"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, errorResponse{"empty auth"})
 			return
 		}
 		header = header[len(prefix):]
 		// Authorize
 		userID, err := api.SessionStorage.Authorize(header)
 		if err == session.UnauthorizedTokenErr {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, ErrorResponse{"bad auth"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, errorResponse{"bad auth"})
 			return
 		} else if err != nil {
-			c.AbortWithStatusJSON(http.StatusInternalServerError, ErrorResponse{internalServerError})
+			c.AbortWithStatusJSON(http.StatusInternalServerError, errorResponse{internalServerErr})
 			return
 		}
 		// Set in map
