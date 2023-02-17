@@ -27,16 +27,27 @@ func main() {
 		users.POST("/logout", apiData.UserLogout)
 	}
 	// General stuff
-	general := r.Group("/general")
-	general.Use(apiData.AuthorizeUserMiddleware())
+	notes := r.Group("/notes")
+	notes.Use(apiData.AuthorizeUserMiddleware())
 	{
-		general.PUT("/note/simple")
-		general.PUT("/note/todo")
-		general.GET("/notes")
-		general.DELETE("/note")
-		general.GET("/note")
-		general.POST("/reorder")
-		general.PUT("/deadline")
+		notes.GET("/notes", apiData.GetNotes)
+		notes.PUT("/note")
+		notes.GET("/note")
+		notes.PATCH("/note")
+		notes.DELETE("/note")
+		notes.POST("/reorder")
+		notes.PUT("/deadline")
+	}
+	todo := r.Group("/todo")
+	notes.Use(apiData.AuthorizeUserMiddleware())
+	{
+		todo.GET("/todos")
+		todo.PUT("/todo")
+		todo.GET("/todo")
+		todo.DELETE("/todo")
+		todo.POST("/reorder")
+		todo.PUT("/deadline")
+		todo.POST("/toggle")
 	}
 	// Listen
 	err = r.Run(getListenAddress())

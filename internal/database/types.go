@@ -1,0 +1,24 @@
+package database
+
+import "time"
+
+type SavedImage struct {
+	ID       string `json:"id"`
+	Filename string `json:"filename"`
+}
+
+type Color struct {
+	R uint8 `json:"r"`
+	G uint8 `json:"g"`
+	B uint8 `json:"b"`
+}
+
+type Note struct {
+	ID              int32        `json:"id"`
+	Title           string       `json:"title"`
+	Text            string       `json:"preview"`
+	CreatedAt       time.Time    `json:"created_at"`
+	Deadline        *time.Time   `json:"deadline,omitempty"`
+	BackgroundColor *Color       `json:"background_color,omitempty"`
+	Images          []SavedImage `json:"images"`
+}
