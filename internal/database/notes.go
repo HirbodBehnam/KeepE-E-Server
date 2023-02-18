@@ -79,8 +79,8 @@ func (db Database) InsertNote(ctx context.Context, forUser uint64, note Note) (N
 	}
 	// Now insert the pics
 	for i := range note.Images {
-		err = tx.QueryRow(ctx, "INSERT INTO normal_note_photos (id, filename, for_note) VALUES (gen_random_uuid(), $1, $2)",
-			note.Images[i].Filename, note.ID).Scan(&note.Images[i].ID)
+		_, err = tx.Exec(ctx, "INSERT INTO normal_note_photos (id, filename, for_note) VALUES ($1, $2, $3)",
+			note.Images[i].ID, note.Images[i].Filename, note.ID)
 		if err != nil {
 			return Note{}, errors.Wrap(err, "cannot insert image of note")
 		}
@@ -128,4 +128,19 @@ func (db Database) ReorderNote(ctx context.Context, forUser uint64, note1, note2
 func (db Database) SetNoteDeadline(ctx context.Context, forUser uint64, noteID int32, deadline *time.Time) error {
 	_, err := db.db.Exec(ctx, "UPDATE normal_notes SET deadline=$1 WHERE id=$2 AND for_user=$3", deadline, noteID, forUser)
 	return err
+}
+
+func (db Database) EditNote(ctx context.Context, forUser uint64, note Note) error {
+	_, err := db.db.Exec(ctx, "UPDATE normal_notes SET title=$1, note_text=$2, deadline=$3 WHERE id=$4 AND for_user=$5",
+		note.Title, note.Text, note.Deadline, note.ID, forUser)
+	if err != nil {
+		return err
+	}
+	// Fuck security and error checks
+	_, _ = db.db.Exec(ctx, "DELETE FROM normal_note_photos WHERE for_note=$1", note.ID)
+	for _, image := range note.Images {
+		_, _ = db.db.Exec(ctx, "INSERT INTO normal_note_photos (id, filename, for_note) VALUES ($1, $2, $3)",
+			image.ID, image.Filename, forUser)
+	}
+	return nil
 }

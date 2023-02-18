@@ -1,6 +1,7 @@
 package api
 
 import (
+	"KeepExpandedAndEnhanced/internal/database"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 	"net/http"
@@ -33,6 +34,44 @@ func (api *API) GetNote(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, note)
+}
+
+// AddNote will add a new note to notes of user
+func (api *API) AddNote(c *gin.Context) {
+	userID := c.MustGet(userIDAuthedContext).(uint64)
+	var note database.Note
+	err := c.BindJSON(&note)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, errorResponse{bodyParseErr + err.Error()})
+		return
+	}
+	note, err = api.Database.InsertNote(c.Request.Context(), userID, note)
+	if err != nil {
+		log.WithError(err).WithField("userID", userID).WithField("note", note).Error("cannot insert note of user")
+		c.JSON(http.StatusInternalServerError, errorResponse{internalServerErr})
+		return
+	}
+	c.JSON(http.StatusOK, note)
+}
+
+func (api *API) EditNote(c *gin.Context) {
+	userID := c.MustGet(userIDAuthedContext).(uint64)
+	var note database.Note
+	if err := c.BindJSON(&note); err != nil {
+		c.JSON(http.StatusBadRequest, errorResponse{bodyParseErr + err.Error()})
+		return
+	}
+	if note.ID == 0 {
+		c.JSON(http.StatusBadRequest, errorResponse{bodyParseErr + "note id must not be zero"})
+		return
+	}
+	// Edit the note
+	err := api.Database.EditNote(c.Request.Context(), userID, note)
+	if err != nil {
+		log.WithError(err).WithField("userID", userID).WithField("note", note).Error("cannot edit note of user")
+		c.JSON(http.StatusInternalServerError, errorResponse{internalServerErr})
+		return
+	}
 }
 
 func (api *API) DeleteNote(c *gin.Context) {

@@ -35,8 +35,8 @@ func main() {
 	{
 		notes.GET("/notes", apiData.GetNotes)
 		notes.GET("/note", apiData.GetNote)
-		notes.POST("/note")
-		notes.PATCH("/note")
+		notes.POST("/note", apiData.AddNote)
+		notes.PATCH("/note", apiData.EditNote)
 		notes.DELETE("/note", apiData.DeleteNote)
 		notes.PATCH("/reorder", apiData.ReorderNote)
 		notes.PATCH("/deadline", apiData.SetNoteDeadline)

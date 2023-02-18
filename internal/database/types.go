@@ -15,8 +15,8 @@ type Color struct {
 
 type Note struct {
 	ID              int32        `json:"id"`
-	Title           string       `json:"title"`
-	Text            string       `json:"preview"`
+	Title           string       `json:"title" binding:"required"`
+	Text            string       `json:"text"`
 	CreatedAt       time.Time    `json:"created_at"`
 	Deadline        *time.Time   `json:"deadline,omitempty"`
 	BackgroundColor *Color       `json:"background_color,omitempty"`
