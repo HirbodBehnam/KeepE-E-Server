@@ -20,3 +20,16 @@ func getListenAddress() string {
 	}
 	return listen
 }
+
+func getUploadDir() string {
+	uploadDir := os.Getenv("UPLOAD_DIR")
+	if uploadDir == "" {
+		uploadDir = "./uploaded-files"
+	}
+	log.Debugf("Using %s as upload dir", uploadDir)
+	err := os.MkdirAll(uploadDir, 0666)
+	if err != nil {
+		log.WithError(err).Fatalln("cannot create upload dir")
+	}
+	return uploadDir
+}

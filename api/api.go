@@ -8,4 +8,5 @@ import (
 type API struct {
 	SessionStorage session.Interface
 	Database       database.Database
+	UploadPath     string
 }

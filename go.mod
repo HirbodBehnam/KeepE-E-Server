@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/gin-gonic/gin v1.8.2
 	github.com/go-faster/errors v0.6.1
+	github.com/google/uuid v1.3.0
 	github.com/jackc/pgx/v5 v5.3.0
 	github.com/sirupsen/logrus v1.9.0
 	golang.org/x/crypto v0.6.0

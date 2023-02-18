@@ -18,7 +18,7 @@ func (api *API) UserLogin(c *gin.Context) {
 		return
 	}
 	// Check username and password
-	userID, err := api.Database.UserLogin(request.Username, request.Password)
+	userID, err := api.Database.UserLogin(c.Request.Context(), request.Username, request.Password)
 	if errors.Is(err, database.InvalidCredentialsErr) {
 		c.JSON(http.StatusForbidden, errorResponse{Error: database.InvalidCredentialsErr.Error()})
 		return
@@ -47,7 +47,7 @@ func (api *API) UserSignup(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, errorResponse{bodyParseErr + err.Error()})
 		return
 	}
-	err := api.Database.SignupUser(request.Username, request.Password)
+	err := api.Database.SignupUser(c.Request.Context(), request.Username, request.Password)
 	// Check for duplicate
 	if pgErr, ok := err.(*pgconn.PgError); ok {
 		if pgErr.Code == "23505" {

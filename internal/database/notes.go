@@ -72,8 +72,8 @@ func (db Database) InsertNote(ctx context.Context, forUser uint64, note Note) (N
 	}
 	defer tx.Rollback(ctx)
 	// At first insert the note itself
-	err = tx.QueryRow(ctx, "INSERT INTO normal_notes (for_user, title, note_text, background_color, created_at, deadline, note_order) VALUES ($1, $2, $3, NULL, NOW(), $4, (SELECT MAX(note_order) FROM normal_notes WHERE for_user=$1)) RETURNING id",
-		forUser, note.Title, note.Text, note.Deadline).Scan(&note.ID)
+	err = tx.QueryRow(ctx, "INSERT INTO normal_notes (for_user, title, note_text, background_color, created_at, deadline, note_order) VALUES ($1, $2, $3, NULL, NOW(), $4, (SELECT COALESCE(MAX(note_order)+1, 0) FROM normal_notes WHERE for_user=$1)) RETURNING id, created_at",
+		forUser, note.Title, note.Text, note.Deadline).Scan(&note.ID, &note.CreatedAt)
 	if err != nil {
 		return Note{}, errors.Wrap(err, "cannot insert note itself")
 	}
@@ -125,7 +125,7 @@ func (db Database) ReorderNote(ctx context.Context, forUser uint64, note1, note2
 	return nil
 }
 
-func (db Database) NoteDeadline(ctx context.Context, forUser uint64, noteID int32, deadline *time.Time) error {
+func (db Database) SetNoteDeadline(ctx context.Context, forUser uint64, noteID int32, deadline *time.Time) error {
 	_, err := db.db.Exec(ctx, "UPDATE normal_notes SET deadline=$1 WHERE id=$2 AND for_user=$3", deadline, noteID, forUser)
 	return err
 }

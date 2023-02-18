@@ -9,7 +9,9 @@ import (
 )
 
 func main() {
+	log.SetLevel(log.TraceLevel)
 	apiData := new(api.API)
+	apiData.UploadPath = getUploadDir()
 	apiData.SessionStorage = session.NewInMemorySession()
 	// Connect to database
 	db, err := database.NewPostgresDatabase(getDatabaseConnectionURL())
@@ -19,6 +21,7 @@ func main() {
 	apiData.Database = database.NewDatabase(db)
 	// Make gin
 	r := gin.Default()
+	r.MaxMultipartMemory = 8 << 20 // 8 MiB
 	// Login
 	users := r.Group("/users")
 	{
@@ -31,12 +34,12 @@ func main() {
 	notes.Use(apiData.AuthorizeUserMiddleware())
 	{
 		notes.GET("/notes", apiData.GetNotes)
-		notes.PUT("/note")
-		notes.GET("/note")
+		notes.GET("/note", apiData.GetNote)
+		notes.POST("/note")
 		notes.PATCH("/note")
-		notes.DELETE("/note")
-		notes.POST("/reorder")
-		notes.PUT("/deadline")
+		notes.DELETE("/note", apiData.DeleteNote)
+		notes.PATCH("/reorder", apiData.ReorderNote)
+		notes.PATCH("/deadline", apiData.SetNoteDeadline)
 	}
 	todo := r.Group("/todo")
 	notes.Use(apiData.AuthorizeUserMiddleware())
@@ -49,6 +52,9 @@ func main() {
 		todo.PUT("/deadline")
 		todo.POST("/toggle")
 	}
+	// File upload
+	r.POST("/upload", apiData.AuthorizeUserMiddleware(), apiData.UploadFile)
+	r.Static("/files", apiData.UploadPath)
 	// Listen
 	err = r.Run(getListenAddress())
 	if err != nil {
