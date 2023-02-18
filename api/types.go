@@ -1,7 +1,5 @@
 package api
 
-import "time"
-
 const internalServerErr = "internal error"
 const bodyParseErr = "cannot parse body: "
 const userExistsErr = "user already exists"
@@ -20,15 +18,10 @@ type loginResponse struct {
 }
 
 type getDeleteEntityRequest struct {
-	ID int32 `query:"id" binding:"required"`
+	ID int32 `form:"id" binding:"required"`
 }
 
 type reOrderRequest struct {
-	ID1 int32 `query:"id1" binding:"required"`
-	ID2 int32 `query:"id2" binding:"required"`
-}
-
-type setDeadlineRequest struct {
-	ID       int32      `query:"id" binding:"required"`
-	Deadline *time.Time `query:"id"`
+	ID1 int32 `json:"id1" binding:"required"`
+	ID2 int32 `json:"id2" binding:"required"`
 }

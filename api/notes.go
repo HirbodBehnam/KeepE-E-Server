@@ -3,6 +3,7 @@ package api
 import (
 	"KeepExpandedAndEnhanced/internal/database"
 	"github.com/gin-gonic/gin"
+	"github.com/jackc/pgx/v5"
 	log "github.com/sirupsen/logrus"
 	"net/http"
 )
@@ -28,6 +29,10 @@ func (api *API) GetNote(c *gin.Context) {
 		return
 	}
 	note, err := api.Database.GetNote(c.Request.Context(), userID, requestData.ID)
+	if err == pgx.ErrNoRows {
+		c.JSON(http.StatusOK, gin.H{})
+		return
+	}
 	if err != nil {
 		log.WithError(err).WithField("userID", userID).WithField("noteID", requestData.ID).Error("cannot get note of user")
 		c.JSON(http.StatusInternalServerError, errorResponse{internalServerErr})
@@ -72,6 +77,7 @@ func (api *API) EditNote(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, errorResponse{internalServerErr})
 		return
 	}
+	c.JSON(http.StatusOK, gin.H{})
 }
 
 func (api *API) DeleteNote(c *gin.Context) {
@@ -93,29 +99,13 @@ func (api *API) DeleteNote(c *gin.Context) {
 func (api *API) ReorderNote(c *gin.Context) {
 	userID := c.MustGet(userIDAuthedContext).(uint64)
 	var requestData reOrderRequest
-	if err := c.BindQuery(&requestData); err != nil {
+	if err := c.BindJSON(&requestData); err != nil {
 		c.JSON(http.StatusBadRequest, errorResponse{bodyParseErr + err.Error()})
 		return
 	}
 	err := api.Database.ReorderNote(c.Request.Context(), userID, requestData.ID1, requestData.ID2)
 	if err != nil {
 		log.WithError(err).WithField("userID", userID).WithField("request", requestData).Error("cannot reorder notes of user")
-		c.JSON(http.StatusInternalServerError, errorResponse{internalServerErr})
-		return
-	}
-	c.JSON(http.StatusOK, gin.H{})
-}
-
-func (api *API) SetNoteDeadline(c *gin.Context) {
-	userID := c.MustGet(userIDAuthedContext).(uint64)
-	var requestData setDeadlineRequest
-	if err := c.BindQuery(&requestData); err != nil {
-		c.JSON(http.StatusBadRequest, errorResponse{bodyParseErr + err.Error()})
-		return
-	}
-	err := api.Database.SetNoteDeadline(c.Request.Context(), userID, requestData.ID, requestData.Deadline)
-	if err != nil {
-		log.WithError(err).WithField("userID", userID).WithField("request", requestData).Error("cannot set deadline of a note of user")
 		c.JSON(http.StatusInternalServerError, errorResponse{internalServerErr})
 		return
 	}

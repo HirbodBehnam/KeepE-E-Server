@@ -18,7 +18,7 @@ CREATE TABLE public.normal_notes
     -- Order of this note in user notes
     note_order       int4      NOT NULL,
     CONSTRAINT normal_notes_pk PRIMARY KEY (id),
-    CONSTRAINT normal_notes_user_fk FOREIGN KEY (for_user) REFERENCES public.users (id)
+    CONSTRAINT normal_notes_user_fk FOREIGN KEY (for_user) REFERENCES public.users (id) ON DELETE CASCADE
 );
 CREATE TABLE public.normal_note_photos
 (
@@ -26,5 +26,5 @@ CREATE TABLE public.normal_note_photos
     filename varchar NOT NULL,
     for_note int4    NOT NULL,
     CONSTRAINT normal_notes_photos_pk PRIMARY KEY (id),
-    CONSTRAINT normal_notes_photos_note_fk FOREIGN KEY (for_note) REFERENCES public.normal_notes (id)
+    CONSTRAINT normal_notes_photos_note_fk FOREIGN KEY (for_note) REFERENCES public.normal_notes (id) ON DELETE CASCADE
 );

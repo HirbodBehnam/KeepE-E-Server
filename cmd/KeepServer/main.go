@@ -39,7 +39,6 @@ func main() {
 		notes.PATCH("/note", apiData.EditNote)
 		notes.DELETE("/note", apiData.DeleteNote)
 		notes.PATCH("/reorder", apiData.ReorderNote)
-		notes.PATCH("/deadline", apiData.SetNoteDeadline)
 	}
 	todo := r.Group("/todo")
 	notes.Use(apiData.AuthorizeUserMiddleware())
@@ -49,7 +48,6 @@ func main() {
 		todo.GET("/todo")
 		todo.DELETE("/todo")
 		todo.POST("/reorder")
-		todo.PUT("/deadline")
 		todo.POST("/toggle")
 	}
 	// File upload

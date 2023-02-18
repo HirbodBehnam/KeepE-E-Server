@@ -3,7 +3,6 @@ package database
 import (
 	"context"
 	"github.com/go-faster/errors"
-	"time"
 )
 
 func (db Database) GetNotes(ctx context.Context, userID uint64) ([]Note, error) {
@@ -60,6 +59,7 @@ func (db Database) getNoteImages(ctx context.Context, noteID int32) ([]SavedImag
 		if err != nil {
 			return nil, errors.Wrap(err, "cannot scan row")
 		}
+		images = append(images, savedImage)
 	}
 	return images, nil
 }
@@ -89,20 +89,19 @@ func (db Database) InsertNote(ctx context.Context, forUser uint64, note Note) (N
 	if err != nil {
 		return Note{}, errors.Wrap(err, "cannot commit")
 	}
+	// Small fix
+	if note.Images == nil {
+		note.Images = make([]SavedImage, 0)
+	}
 	return note, nil
 }
 
 func (db Database) DeleteNote(ctx context.Context, forUser uint64, noteID int32) error {
 	// No transaction just fuck it
-	rows, err := db.db.Exec(ctx, "DELETE FROM normal_notes WHERE id=$1 AND for_user=$2", noteID, forUser)
+	_, err := db.db.Exec(ctx, "DELETE FROM normal_notes WHERE id=$1 AND for_user=$2", noteID, forUser)
 	if err != nil {
 		return errors.Wrap(err, "cannot delete note itself")
 	}
-	if rows.RowsAffected() == 0 { // user trying to delete another note
-		return nil // not errors. Make frontend happy
-	}
-	_, _ = db.db.Exec(ctx, "DELETE FROM normal_note_photos WHERE for_note=$1", noteID)
-	// we don't care about photo errors
 	return nil
 }
 
@@ -125,11 +124,6 @@ func (db Database) ReorderNote(ctx context.Context, forUser uint64, note1, note2
 	return nil
 }
 
-func (db Database) SetNoteDeadline(ctx context.Context, forUser uint64, noteID int32, deadline *time.Time) error {
-	_, err := db.db.Exec(ctx, "UPDATE normal_notes SET deadline=$1 WHERE id=$2 AND for_user=$3", deadline, noteID, forUser)
-	return err
-}
-
 func (db Database) EditNote(ctx context.Context, forUser uint64, note Note) error {
 	_, err := db.db.Exec(ctx, "UPDATE normal_notes SET title=$1, note_text=$2, deadline=$3 WHERE id=$4 AND for_user=$5",
 		note.Title, note.Text, note.Deadline, note.ID, forUser)
@@ -140,7 +134,7 @@ func (db Database) EditNote(ctx context.Context, forUser uint64, note Note) erro
 	_, _ = db.db.Exec(ctx, "DELETE FROM normal_note_photos WHERE for_note=$1", note.ID)
 	for _, image := range note.Images {
 		_, _ = db.db.Exec(ctx, "INSERT INTO normal_note_photos (id, filename, for_note) VALUES ($1, $2, $3)",
-			image.ID, image.Filename, forUser)
+			image.ID, image.Filename, note.ID)
 	}
 	return nil
 }
