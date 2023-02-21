@@ -24,7 +24,7 @@ type Note struct {
 }
 
 type TodoItem struct {
-	Text     string     `json:"text"`
+	Text     string     `json:"text" binding:"required"`
 	Deadline *time.Time `json:"deadline,omitempty"`
 	Done     bool       `json:"done"`
 }

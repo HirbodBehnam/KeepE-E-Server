@@ -50,7 +50,7 @@ func (api *API) AddNote(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, errorResponse{bodyParseErr + err.Error()})
 		return
 	}
-	note, err = api.Database.InsertNote(c.Request.Context(), userID, note)
+	note, err = api.Database.AddNote(c.Request.Context(), userID, note)
 	if err != nil {
 		log.WithError(err).WithField("userID", userID).WithField("note", note).Error("cannot insert note of user")
 		c.JSON(http.StatusInternalServerError, errorResponse{internalServerErr})

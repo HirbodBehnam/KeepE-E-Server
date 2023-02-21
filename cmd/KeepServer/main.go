@@ -40,15 +40,15 @@ func main() {
 		notes.DELETE("/note", apiData.DeleteNote)
 		notes.PATCH("/reorder", apiData.ReorderNote)
 	}
-	todo := r.Group("/todo")
+	todo := r.Group("/todos")
 	notes.Use(apiData.AuthorizeUserMiddleware())
 	{
-		todo.GET("/todos")
-		todo.PUT("/todo")
-		todo.GET("/todo")
-		todo.PATCH("/todo")
-		todo.DELETE("/todo")
-		todo.POST("/reorder")
+		todo.GET("/todos", apiData.GetTodos)
+		todo.POST("/todo", apiData.AddTodo)
+		todo.GET("/todo", apiData.GetTodo)
+		todo.PATCH("/todo", apiData.EditTodo)
+		todo.DELETE("/todo", apiData.DeleteTodo)
+		todo.PATCH("/reorder", apiData.ReorderTodo)
 	}
 	// File upload
 	r.POST("/upload", apiData.AuthorizeUserMiddleware(), apiData.UploadFile)
