@@ -6,7 +6,7 @@ import (
 )
 
 func (db Database) GetTodos(ctx context.Context, userID uint64) ([]Todo, error) {
-	rows, err := db.db.Query(ctx, "SELECT id, title, created_at FROM todo WHERE for_user=$1", userID)
+	rows, err := db.db.Query(ctx, "SELECT id, title, created_at FROM todo WHERE for_user=$1 ORDER BY todo_order", userID)
 	if err != nil {
 		return nil, err
 	}
@@ -117,8 +117,8 @@ func (db Database) ReorderTodo(ctx context.Context, forUser uint64, todo1, todo2
 		return err
 	}
 	// Update them in database. Also, we don't care about errors
-	_, _ = db.db.Exec(ctx, "UPDATE normal_notes SET note_order=$1 WHERE id=$2", todo1Order, todo2)
-	_, _ = db.db.Exec(ctx, "UPDATE normal_notes SET note_order=$1 WHERE id=$2", todo2Order, todo1)
+	_, _ = db.db.Exec(ctx, "UPDATE todo SET todo_order=$1 WHERE id=$2", todo1Order, todo2)
+	_, _ = db.db.Exec(ctx, "UPDATE todo SET todo_order=$1 WHERE id=$2", todo2Order, todo1)
 	return nil
 }
 

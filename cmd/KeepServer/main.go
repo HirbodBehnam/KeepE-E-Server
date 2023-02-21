@@ -41,7 +41,7 @@ func main() {
 		notes.PATCH("/reorder", apiData.ReorderNote)
 	}
 	todo := r.Group("/todos")
-	notes.Use(apiData.AuthorizeUserMiddleware())
+	todo.Use(apiData.AuthorizeUserMiddleware())
 	{
 		todo.GET("/todos", apiData.GetTodos)
 		todo.POST("/todo", apiData.AddTodo)
