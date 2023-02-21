@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  database:
+    restart: on-failure
+    image: postgres:alpine
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - "/tmp/keep_db:/var/lib/postgresql/data"
+  backend:
+    restart: on-failure
+    environment:
+      - DATABASE_URL=postgres://postgres:1234@database:5432/postgres
+      - HTTP_LISTEN=0.0.0.0:51691
+    ports:
+      - "51691:51691"
+    build:
+      context: ./AuthCore
+    depends_on:
+      - redis
+      - database

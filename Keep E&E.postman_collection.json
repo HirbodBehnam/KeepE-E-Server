@@ -1,0 +1,1642 @@
+{
+	"info": {
+		"_postman_id": "b8f2b7d9-9a0b-4322-b8b3-130fcd65603e",
+		"name": "Keep E&E",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14537487"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"hirbod\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"hirbod\",\r\n    \"password\": \"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/users/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 17 Feb 2023 17:10:22 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"KUGR4PRPU3SYIHUNLNI7QQLVMH64YINM\"\n}"
+						},
+						{
+							"name": "Login Bad",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"hirbod\",\r\n    \"password\": \"12344\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/users/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 17 Feb 2023 17:10:31 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"invalid credentials\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"hirbod\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/signup",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Signup OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"hirbod\",\r\n    \"password\": \"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/users/signup",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 17 Feb 2023 17:09:58 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Signup Duplicate",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"hirbod\",\r\n    \"password\": \"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/users/signup",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"signup"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 17 Feb 2023 17:10:11 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"user already exists\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Signout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/logout",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Signout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/users/logout",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 17 Feb 2023 17:11:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Notes",
+			"item": [
+				{
+					"name": "Get notes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/notes/notes",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"notes",
+								"notes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get notes",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/notes/notes",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"notes",
+										"notes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Feb 2023 19:13:33 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "435"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"Note title\",\n        \"text\": \"Note text\",\n        \"created_at\": \"2023-02-18T21:24:54.076269+03:30\",\n        \"images\": []\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Note title\",\n        \"text\": \"Note text\",\n        \"created_at\": \"2023-02-18T21:28:32.391796+03:30\",\n        \"deadline\": \"2023-04-18T22:24:54+04:30\",\n        \"images\": []\n    },\n    {\n        \"id\": 4,\n        \"title\": \"Note title\",\n        \"text\": \"Note text\",\n        \"created_at\": \"2023-02-18T22:38:17.095472+03:30\",\n        \"images\": [\n            {\n                \"id\": \"682f0588-c05d-4e4f-9c7f-76b89c16fe1c\",\n                \"filename\": \"hello.png\"\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create note",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Note title\",\r\n    \"text\": \"Note text\",\r\n    \"images\": [\r\n        {\r\n            \"id\": \"682f0588-c05d-4e4f-9c7f-76b89c16fe1c\",\r\n            \"filename\": \"hello.png\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/notes/note",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"notes",
+								"note"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create note with text only",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Note title\",\r\n    \"text\": \"Note text\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/notes/note",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"notes",
+										"note"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Feb 2023 17:54:54 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"title\": \"Note title\",\n    \"text\": \"Note text\",\n    \"created_at\": \"2023-02-18T21:24:54.076269+03:30\",\n    \"images\": []\n}"
+						},
+						{
+							"name": "Create note with deadline",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Note title\",\r\n    \"text\": \"Note text\",\r\n    \"deadline\": \"2023-04-18T21:24:54+03:30\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/notes/note",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"notes",
+										"note"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Feb 2023 17:58:32 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "149"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"title\": \"Note title\",\n    \"text\": \"Note text\",\n    \"created_at\": \"2023-02-18T21:28:32.391796+03:30\",\n    \"deadline\": \"2023-04-18T21:24:54+03:30\",\n    \"images\": []\n}"
+						},
+						{
+							"name": "Create note with image",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Note title\",\r\n    \"text\": \"Note text\",\r\n    \"images\": [\r\n        {\r\n            \"id\": \"682f0588-c05d-4e4f-9c7f-76b89c16fe1c\",\r\n            \"filename\": \"hello.png\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/notes/note",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"notes",
+										"note"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Feb 2023 19:08:17 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "176"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"title\": \"Note title\",\n    \"text\": \"Note text\",\n    \"created_at\": \"2023-02-18T22:38:17.095472+03:30\",\n    \"images\": [\n        {\n            \"id\": \"682f0588-c05d-4e4f-9c7f-76b89c16fe1c\",\n            \"filename\": \"hello.png\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get note",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/notes/note?id=4",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"notes",
+								"note"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get note",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/notes/note?id=4",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"notes",
+										"note"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Feb 2023 19:19:33 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "176"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"title\": \"Note title\",\n    \"text\": \"Note text\",\n    \"created_at\": \"2023-02-18T22:38:17.095472+03:30\",\n    \"images\": [\n        {\n            \"id\": \"682f0588-c05d-4e4f-9c7f-76b89c16fe1c\",\n            \"filename\": \"hello.png\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete note",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/notes/note?id=4",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"notes",
+								"note"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get note",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/notes/note?id=4",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"notes",
+										"note"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Feb 2023 19:19:33 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "176"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"title\": \"Note title\",\n    \"text\": \"Note text\",\n    \"created_at\": \"2023-02-18T22:38:17.095472+03:30\",\n    \"images\": [\n        {\n            \"id\": \"682f0588-c05d-4e4f-9c7f-76b89c16fe1c\",\n            \"filename\": \"hello.png\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Delete note",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/notes/note?id=4",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"notes",
+										"note"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Feb 2023 19:34:29 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				},
+				{
+					"name": "Edit note",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"title\": \"New title\",\r\n    \"text\": \"Note text\",\r\n    \"created_at\": \"2023-02-18T22:38:17.095472+03:30\",\r\n    \"deadline\": \"2024-02-18T22:38:17.095472+03:30\",\r\n    \"images\": [\r\n        {\r\n            \"id\": \"682f0588-c05d-4e4f-9c7f-76b89c16fe1c\",\r\n            \"filename\": \"hello.png\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/notes/note",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"notes",
+								"note"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit note and remove deadline",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 4,\r\n    \"title\": \"New title\",\r\n    \"text\": \"Note text\",\r\n    \"created_at\": \"2023-02-18T22:38:17.095472+03:30\",\r\n    \"images\": [\r\n        {\r\n            \"id\": \"682f0588-c05d-4e4f-9c7f-76b89c16fe1c\",\r\n            \"filename\": \"hello.png\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/notes/note",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"notes",
+										"note"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Feb 2023 19:26:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Edit note and set deadline",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 4,\r\n    \"title\": \"New title\",\r\n    \"text\": \"Note text\",\r\n    \"created_at\": \"2023-02-18T22:38:17.095472+03:30\",\r\n    \"deadline\": \"2024-02-18T22:38:17.095472+03:30\",\r\n    \"images\": [\r\n        {\r\n            \"id\": \"682f0588-c05d-4e4f-9c7f-76b89c16fe1c\",\r\n            \"filename\": \"hello.png\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/notes/note",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"notes",
+										"note"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Feb 2023 19:29:42 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				},
+				{
+					"name": "Reorder note",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id1\": 1,\r\n    \"id2\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/notes/reorder",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"notes",
+								"reorder"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit note",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id1\": 1,\r\n    \"id2\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/notes/reorder",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"notes",
+										"reorder"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Feb 2023 19:40:29 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Todo",
+			"item": [
+				{
+					"name": "Get Todos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/todos/todos",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todos",
+								"todos"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Todos",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/todos/todos",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"todos",
+										"todos"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Feb 2023 17:36:27 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "343"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"my empty todo\",\n        \"created_at\": \"2023-02-21T20:57:18.256642+03:30\",\n        \"tasks\": []\n    },\n    {\n        \"id\": 2,\n        \"title\": \"my empty todo\",\n        \"created_at\": \"2023-02-21T21:03:52.071945+03:30\",\n        \"tasks\": [\n            {\n                \"text\": \"hello world\",\n                \"done\": false\n            },\n            {\n                \"text\": \"completed task\",\n                \"done\": true\n            },\n            {\n                \"text\": \"deadlined task\",\n                \"deadline\": \"2023-02-21T20:57:18.256642+03:30\",\n                \"done\": false\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Todo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/todos/todo?id=2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todos",
+								"todo"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Todo",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/todos/todo?id=2",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"todos",
+										"todo"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Feb 2023 17:43:04 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "249"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"title\": \"my empty todo\",\n    \"created_at\": \"2023-02-21T21:03:52.071945+03:30\",\n    \"tasks\": [\n        {\n            \"text\": \"hello world\",\n            \"done\": false\n        },\n        {\n            \"text\": \"completed task\",\n            \"done\": true\n        },\n        {\n            \"text\": \"deadlined task\",\n            \"deadline\": \"2023-02-21T20:57:18.256642+03:30\",\n            \"done\": false\n        }\n    ]\n}"
+						},
+						{
+							"name": "Get Todo Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/todos/todo?id=3",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"todos",
+										"todo"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Feb 2023 17:43:18 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				},
+				{
+					"name": "Create Todo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"my todo\",\r\n    \"tasks\": [\r\n        {\r\n            \"text\": \"hello world\"\r\n        },\r\n        {\r\n            \"text\": \"completed task\",\r\n            \"done\": true\r\n        },\r\n        {\r\n            \"text\": \"deadlined task\",\r\n            \"deadline\": \"2023-02-21T20:57:18.256642+03:30\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/todos/todo",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todos",
+								"todo"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Empty Todo",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"my empty todo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/todos/todo",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"todos",
+										"todo"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Feb 2023 17:27:18 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "91"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"title\": \"my empty todo\",\n    \"created_at\": \"2023-02-21T20:57:18.256642+03:30\",\n    \"tasks\": []\n}"
+						},
+						{
+							"name": "Create Todo",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"my empty todo\",\r\n    \"tasks\": [\r\n        {\r\n            \"text\": \"hello world\"\r\n        },\r\n        {\r\n            \"text\": \"completed task\",\r\n            \"done\": true\r\n        },\r\n        {\r\n            \"text\": \"deadlined task\",\r\n            \"deadline\": \"2023-02-21T20:57:18.256642+03:30\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/todos/todo",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"todos",
+										"todo"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Feb 2023 17:33:52 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "249"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"title\": \"my empty todo\",\n    \"created_at\": \"2023-02-21T21:03:52.071945+03:30\",\n    \"tasks\": [\n        {\n            \"text\": \"hello world\",\n            \"done\": false\n        },\n        {\n            \"text\": \"completed task\",\n            \"done\": true\n        },\n        {\n            \"text\": \"deadlined task\",\n            \"deadline\": \"2023-02-21T20:57:18.256642+03:30\",\n            \"done\": false\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Todo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"title\": \"my edited todo\",\r\n    \"tasks\": [\r\n        {\r\n            \"text\": \"hello world\",\r\n            \"done\": true\r\n        },\r\n        {\r\n            \"text\": \"deadlined task\",\r\n            \"deadline\": \"2023-02-21T20:57:18.256642+03:30\"\r\n        },\r\n        {\r\n            \"text\": \"completed task\",\r\n            \"done\": true\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/todos/todo?id=3",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todos",
+								"todo"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit Todo",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 2,\r\n    \"title\": \"my edited todo\",\r\n    \"tasks\": [\r\n        {\r\n            \"text\": \"hello world\",\r\n            \"done\": true\r\n        },\r\n        {\r\n            \"text\": \"deadlined task\",\r\n            \"deadline\": \"2023-02-21T20:57:18.256642+03:30\"\r\n        },\r\n        {\r\n            \"text\": \"completed task\",\r\n            \"done\": true\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/todos/todo?id=3",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"todos",
+										"todo"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Feb 2023 17:59:11 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				},
+				{
+					"name": "Delete Todo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/todos/todo?id=2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todos",
+								"todo"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Todo",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/todos/todo?id=2",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"todos",
+										"todo"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Feb 2023 18:01:38 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				},
+				{
+					"name": "Reorder Todo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id1\": 1,\r\n    \"id2\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/todos/reorder",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todos",
+								"reorder"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit note",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id1\": 1,\r\n    \"id2\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/notes/reorder",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"notes",
+										"reorder"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Feb 2023 19:40:29 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Upload file",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Hirbod/Pictures/IMG_20190516_192603_087s.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/upload",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"upload"
+					]
+				},
+				"description": "You can later get the file by visiting `{{BASE_URL}}/files/{id}/{filename}`"
+			},
+			"response": [
+				{
+					"name": "Upload file",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Hirbod/Pictures/IMG_20190516_192603_087s.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/upload",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Feb 2023 09:50:35 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "87"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"c618f208-e528-42a2-8399-cfdb07b01783\",\n    \"filename\": \"IMG_20190516_192603_087s.jpg\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
