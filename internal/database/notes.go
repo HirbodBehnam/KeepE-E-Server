@@ -64,7 +64,7 @@ func (db Database) getNoteImages(ctx context.Context, noteID int32) ([]SavedImag
 	return images, nil
 }
 
-func (db Database) InsertNote(ctx context.Context, forUser uint64, note Note) (Note, error) {
+func (db Database) AddNote(ctx context.Context, forUser uint64, note Note) (Note, error) {
 	// Create a transaction to make everything atomic
 	tx, err := db.db.Begin(ctx)
 	if err != nil {
@@ -85,6 +85,7 @@ func (db Database) InsertNote(ctx context.Context, forUser uint64, note Note) (N
 			return Note{}, errors.Wrap(err, "cannot insert image of note")
 		}
 	}
+	// Done
 	err = tx.Commit(ctx)
 	if err != nil {
 		return Note{}, errors.Wrap(err, "cannot commit")

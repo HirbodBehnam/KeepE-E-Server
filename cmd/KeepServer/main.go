@@ -46,9 +46,9 @@ func main() {
 		todo.GET("/todos")
 		todo.PUT("/todo")
 		todo.GET("/todo")
+		todo.PATCH("/todo")
 		todo.DELETE("/todo")
 		todo.POST("/reorder")
-		todo.POST("/toggle")
 	}
 	// File upload
 	r.POST("/upload", apiData.AuthorizeUserMiddleware(), apiData.UploadFile)

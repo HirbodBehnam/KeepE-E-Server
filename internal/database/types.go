@@ -22,3 +22,16 @@ type Note struct {
 	BackgroundColor *Color       `json:"background_color,omitempty"`
 	Images          []SavedImage `json:"images"`
 }
+
+type TodoItem struct {
+	Text     string     `json:"text"`
+	Deadline *time.Time `json:"deadline,omitempty"`
+	Done     bool       `json:"done"`
+}
+
+type Todo struct {
+	ID        int32      `json:"id"`
+	Title     string     `json:"title" binding:"required"`
+	CreatedAt time.Time  `json:"created_at"`
+	Tasks     []TodoItem `json:"tasks"`
+}
