@@ -4,7 +4,6 @@ import (
 	"KeepExpandedAndEnhanced/api"
 	"KeepExpandedAndEnhanced/internal/database"
 	"KeepExpandedAndEnhanced/pkg/session"
-	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 )
@@ -22,7 +21,7 @@ func main() {
 	apiData.Database = database.NewDatabase(db)
 	// Make gin
 	r := gin.Default()
-	r.Use(cors.Default())
+	r.Use(api.CORS())
 	r.MaxMultipartMemory = 8 << 20 // 8 MiB
 	// Login
 	users := r.Group("/users")
